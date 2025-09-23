@@ -4,17 +4,24 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo 'Installing dependencies...'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                echo 'Running tests...'
+                sh 'npm test'
             }
         }
-        stage('Deploy') {
+        stage('Docker Build & Push') {
             steps {
-                echo 'Deploying...'
+                script {
+                    dockerImage = docker.build('your-dockerhub-username/sampleapp')
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials-id') {
+                        dockerImage.push('latest')
+                    }
+                }
             }
         }
     }
