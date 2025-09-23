@@ -17,7 +17,7 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 script {
-                    dockerImage = docker.build(shobs074/sampleapp')
+                    dockerImage = docker.build('shobs074/sampleapp')
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials-id') {
                         dockerImage.push('latest')
                     }
@@ -26,4 +26,5 @@ pipeline {
         }
     }
 }
+
 
