@@ -23,8 +23,8 @@ stage('List Workspace Files') {
         stage('Docker Build & Push') {
             steps {
                 script {
-                    dockerImage = docker.build('shobs074/sampleapp')
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials-id') {
+                    def dockerImage = docker.build('shobs074/sampleapp')
+                    docker.withRegistry('https://registry.hub.docker.com', '853b2940-0f57-4eb9-aca1-067e8b1d1af3') {
                         dockerImage.push('latest')
                     }
                 }
@@ -32,6 +32,7 @@ stage('List Workspace Files') {
         }
     }
 }
+
 
 
 
