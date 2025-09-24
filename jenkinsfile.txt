@@ -14,12 +14,11 @@ pipeline {
                 bat 'npm test'
             }
         }
-stage('List Workspace Files') {
-    steps {
-        bat 'dir'
-    }
-}
-
+        stage('List Workspace Files') {
+            steps {
+                bat 'dir'
+            }
+        }
         stage('Docker Build & Push') {
             steps {
                 script {
@@ -30,8 +29,6 @@ stage('List Workspace Files') {
                 }
             }
         }
-    }
-}
 stage('Deploy') {
     steps {
         bat 'docker stop sampleapp || echo "No running container found"'
@@ -39,7 +36,7 @@ stage('Deploy') {
         bat 'docker run -d -p 3000:3000 --name sampleapp shobs074/sampleapp'
     }
 }
-
+}
 
 
 
